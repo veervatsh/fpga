@@ -1,0 +1,27 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "SystemVerilog: Build Current Project",
+            "type": "shell",
+            "command": "PROJECT_DIR=\"$(dirname '${fileDirname}')\"; iverilog -g2012 -o \"$PROJECT_DIR/sim/sim.out\" \"$PROJECT_DIR\"/src/*.sv \"$PROJECT_DIR\"/sim/*_tb.sv",
+            "problemMatcher": []
+        },
+        {
+            "label": "SystemVerilog: Run Current Project",
+            "type": "shell",
+            "command": "PROJECT_DIR=\"$(dirname '${fileDirname}')\"; cd \"$PROJECT_DIR/sim\" && vvp sim.out",
+            "dependsOn": "SystemVerilog: Build Current Project",
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        },
+        {
+            "label": "SystemVerilog: Simulate Current Project",
+            "type": "shell",
+            "command": "PROJECT_DIR=\"$(dirname '${fileDirname}')\"; code --reuse-window \"$PROJECT_DIR/sim/waveform.vcd\"",
+            "dependsOn": "SystemVerilog: Run Current Project",
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        }
+    ]
+}
