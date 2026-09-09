@@ -1,0 +1,116 @@
+#! /usr/local/Cellar/icarus-verilog/13.0/bin/vvp
+:ivl_version "13.0 (stable)" "(v13_0)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/local/Cellar/icarus-verilog/13.0/lib/ivl/system.vpi";
+:vpi_module "/usr/local/Cellar/icarus-verilog/13.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/local/Cellar/icarus-verilog/13.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/local/Cellar/icarus-verilog/13.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/usr/local/Cellar/icarus-verilog/13.0/lib/ivl/va_math.vpi";
+:vpi_module "/usr/local/Cellar/icarus-verilog/13.0/lib/ivl/v2009.vpi";
+S_0x7fc401808920 .scope package, "$unit" "$unit" 2 1;
+ .timescale 0 0;
+S_0x7fc401808a90 .scope module, "comparator_tb" "comparator_tb" 3 1;
+ .timescale 0 0;
+v0x7fc401a05c50_0 .var "a", 3 0;
+v0x7fc401a05d00_0 .var "b", 3 0;
+v0x7fc401a05dc0_0 .net "equal", 0 0, v0x7fc401909f20_0;  1 drivers
+v0x7fc401a05e90_0 .net "greater", 0 0, v0x7fc401909fd0_0;  1 drivers
+v0x7fc401a05f40_0 .net "less", 0 0, v0x7fc401a05ba0_0;  1 drivers
+S_0x7fc401808c00 .scope begin, "$ivl_for_loop0" "$ivl_for_loop0" 3 22, 3 22 0, S_0x7fc401808a90;
+ .timescale 0 0;
+v0x7fc401808dc0_0 .var/2s "i", 31 0;
+S_0x7fc401909ac0 .scope module, "uut" "comparator" 3 8, 4 7 0, S_0x7fc401808a90;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "a";
+    .port_info 1 /INPUT 4 "b";
+    .port_info 2 /OUTPUT 1 "equal";
+    .port_info 3 /OUTPUT 1 "greater";
+    .port_info 4 /OUTPUT 1 "less";
+v0x7fc401909dc0_0 .net "a", 3 0, v0x7fc401a05c50_0;  1 drivers
+v0x7fc401909e80_0 .net "b", 3 0, v0x7fc401a05d00_0;  1 drivers
+v0x7fc401909f20_0 .var "equal", 0 0;
+v0x7fc401909fd0_0 .var "greater", 0 0;
+v0x7fc401a05ba0_0 .var "less", 0 0;
+E_0x7fc401909d60 .event anyedge, v0x7fc401909dc0_0, v0x7fc401909e80_0;
+    .scope S_0x7fc401909ac0;
+T_0 ;
+Ewait_0 .event/or E_0x7fc401909d60, E_0x0;
+    %wait Ewait_0;
+    %load/vec4 v0x7fc401909e80_0;
+    %load/vec4 v0x7fc401909dc0_0;
+    %cmp/u;
+    %jmp/0xz  T_0.0, 5;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x7fc401909fd0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x7fc401a05ba0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x7fc401909f20_0, 0, 1;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v0x7fc401909dc0_0;
+    %load/vec4 v0x7fc401909e80_0;
+    %cmp/u;
+    %jmp/0xz  T_0.2, 5;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x7fc401909fd0_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x7fc401a05ba0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x7fc401909f20_0, 0, 1;
+    %jmp T_0.3;
+T_0.2 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x7fc401909fd0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x7fc401a05ba0_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x7fc401909f20_0, 0, 1;
+T_0.3 ;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0, $push;
+    .scope S_0x7fc401808a90;
+T_1 ;
+    %vpi_call/w 3 17 "$dumpfile", "waveform.vcd" {0 0 0};
+    %vpi_call/w 3 18 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x7fc401808a90 {0 0 0};
+    %vpi_call/w 3 20 "$monitor", "a=%b b=%b equal=%b greater=%b less=%b", v0x7fc401a05c50_0, v0x7fc401a05d00_0, v0x7fc401a05dc0_0, v0x7fc401a05e90_0, v0x7fc401a05f40_0 {0 0 0};
+    %fork t_1, S_0x7fc401808c00;
+    %jmp t_0;
+    .scope S_0x7fc401808c00;
+t_1 ;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x7fc401808dc0_0, 0, 32;
+T_1.0 ; Top of for-loop
+    %load/vec4 v0x7fc401808dc0_0;
+    %cmpi/s 256, 0, 32;
+	  %jmp/0xz T_1.1, 5;
+    %load/vec4 v0x7fc401808dc0_0;
+    %pad/s 8;
+    %split/vec4 4;
+    %store/vec4 v0x7fc401a05d00_0, 0, 4;
+    %store/vec4 v0x7fc401a05c50_0, 0, 4;
+    %delay 10, 0;
+T_1.2 ; for-loop step statement
+    ; show_stmt_assign_vector: Get l-value for compressed += operand
+    %load/vec4 v0x7fc401808dc0_0;
+    %pushi/vec4 1, 0, 32;
+    %add;
+    %cast2;
+    %store/vec4 v0x7fc401808dc0_0, 0, 32;
+    %jmp T_1.0;
+T_1.1 ; for-loop exit label
+    %end;
+    .scope S_0x7fc401808a90;
+t_0 %join;
+    %vpi_call/w 3 26 "$finish" {0 0 0};
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "-";
+    "/Users/veervatsh/repos/fpga/learning/02_4bit_comparator/sim/4bit_comparator_tb.sv";
+    "/Users/veervatsh/repos/fpga/learning/02_4bit_comparator/src/4bit_comparator.sv";
