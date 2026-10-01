@@ -21,11 +21,13 @@
  * setup for basys3
  finish*/
 
-module overlappingSequenceDetector_tb
+module overlappingSequenceDetector_tb;
 logic clk;
 logic reset;
 logic x;
 logic sequenceDetected;
+
+logic test201,test202;
 
 overlappingSequenceDetectorFSM uut (
     .clk(clk),
@@ -47,7 +49,7 @@ x = 0;*/
 
 initial begin
     $dumpfile ("waveform.vcd");
-    $dumpvars(0,"overlappingSequenceDetector_tb");
+    $dumpvars(0,overlappingSequenceDetector_tb);
     $monitor("clk=%b,reset=%b,x=%b,sequenceDetected=%b",clk,reset,x,sequenceDetected);
 
 //fed
@@ -66,11 +68,11 @@ initial begin
 //print if test worked
     @(posedge clk);
     #0.1
-        if(sequenceDetected == 1b'1) begin
-             $display "PASS TEST 1";
+        if(sequenceDetected == 1'b1) begin
+             $display ("PASS TEST 1");
         end
         else begin
-            $display "FAIL TEST 1";
+            $display ("FAIL TEST 1");
         end
         
     //@(negedge clk)
@@ -91,40 +93,45 @@ initial begin
     x=1;
     @(negedge clk);
     x=1; //start of overlap
-        @(posedge clk);
-        #0.1
-        if(sequenceDetected == 1b'1) begin
-             $display "PASS TEST 2.01";
-        end
-        else begin
-            $display "FAIL TEST 2.01";
-        end
+
+    @(posedge clk);
+     #0.1
+    if(sequenceDetected == 1'b1) begin
+        $display ("\nPASS TEST 2.01\n");
+        test201=1;
+    end
+    else begin
+        $display ("\nFAIL TEST 2.01\n");
+    end
+
     @(negedge clk);
     x=0;
     @(negedge clk);
     x=1;
     @(negedge clk);
     x=1;
-        @(posedge clk);
-        #0.1
-        if(sequenceDetected == 1b'1) begin
-             $display "PASS TEST 2.02";
-        end
-        else begin
-            $display "FAIL TEST 2.02";
-        end
+
+    @(posedge clk);
+    #0.1
+    if(sequenceDetected == 1'b1) begin
+        $display ("\nPASS TEST 2.02\n");
+        test202=1;
+    end
+    else begin
+        $display ("\nFAIL TEST 2.02\n");
+    end
     //@(negedge clk);
     //x=0;
 
     @(posedge clk);
     #0.1
-        if(sequenceDetected == 1b'1) begin
-             $display "PASS TEST 2";
+        if(test201 && test202 == 1) begin
+             $display ("\nPASS TEST 2\n");
         end
         else begin
-            $display "FAIL TEST 2";
+            $display ("\nFAIL TEST 2\n");
         end
-    $finish
+    $finish;
 end
 
 endmodule

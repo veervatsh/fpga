@@ -9,16 +9,16 @@ module overlappingSequenceDetectorFSM(
     input logic x,
     input logic reset,
     
-    ouptut logic sequenceDetected
+    output logic sequenceDetected
 );
 
-typedef enum bit [1:0] stateValues {
+typedef enum bit [1:0] {
     S0 = 2'b00,
     S1 = 2'b01,
-    S2 = 2'b02,
-    S3 = 2'b03
+    S2 = 2'b10,
+    S3 = 2'b11
     
-};
+} stateValues;
 stateValues nextState, currentState;
 
 always_comb begin
