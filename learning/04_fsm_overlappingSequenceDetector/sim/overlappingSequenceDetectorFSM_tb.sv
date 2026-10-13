@@ -175,13 +175,13 @@ initial begin
 
 
         if (bit_register == 4'b1011 && sequenceDetected == 1'b1) begin 
-            $display ("\nSEQUENCE DETECTED\n\nPASS TEST 4\n");
+            $display ("\nSEQUENCE DETECTED\n\nPASS TEST 3\n");
         end
         else if (bit_register != 4'b1011 && sequenceDetected != 1'b1) begin 
-            $display ("\nSEQUENCE NOT DETECTED\n\nPASS TEST 4\n");
+            $display ("\nSEQUENCE NOT DETECTED\n\nPASS TEST 3\n");
         end
         else begin 
-            $display ("\nSEQUENCE NOT DETECTED\n\FAIL TEST 4\n ");
+            $display ("\nSEQUENCE NOT DETECTED\n\FAIL TEST 3\n ");
         end
     end
 
